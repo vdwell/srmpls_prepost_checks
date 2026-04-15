@@ -213,6 +213,45 @@ def mpls_trace (connection:list[BaseConnection, str, str, str], hosts2ping: list
 
 
 
+def ping_result_analysis (ping_results_on_router: list[list[str, int, str, str]]) -> list[int]:
+    """
+    the function takes list with ping result for each host and extract from there key values (4 items): 
+    total number of hosts, 
+    total number of successful pings (100% success rate), 
+    total number of unsuccessful pings (< 100% success rate),
+    total number of wrong/failed commands
+    """
+
+    result: list[int] = []
+
+    hosts_total: int = 0
+    pings_with_success_flag: int = 0
+    pings_without_success_flag: int = 0
+    failed_commands: int = 0
+
+    for item in ping_results_on_router:
+        hosts_total += 1
+        if 'incorrect command' in item[3]:
+            failed_commands += 1
+            continue
+        if item[1] == '100':
+            pings_with_success_flag += 1
+        else: 
+            pings_without_success_flag += 1
+    
+    result.append(hosts_total)
+    result.append(pings_with_success_flag)
+    result.append(pings_without_success_flag)
+    result.append(failed_commands)
+
+    return result
+
+
+
+
+
+
+
 def trace_result_analysis (trace_results_on_router: list[list[str, bool, int, str, list[str], str]]) -> list[int]:
     """
     the function takes list with trace result for each host and extract from there key values (4 items): 
@@ -245,8 +284,6 @@ def trace_result_analysis (trace_results_on_router: list[list[str, bool, int, st
     result.append(failed_commands)
 
     return result
-
-
 
 
 
