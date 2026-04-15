@@ -1,0 +1,3 @@
+mgmt_ip,hostname,os_type,sr_prefix
+172.20.1.103,r03,cisco_xr,172.16.0.3
+172.20.1.104,r04,cisco_xr,172.16.0.4

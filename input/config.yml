@@ -1,0 +1,8 @@
+
+parameters:
+  isis_process_name: 1
+  devices: devices.csv
+  hosts2ping: routers4pings.txt
+  username: cisco
+  password: cisco123
+  
