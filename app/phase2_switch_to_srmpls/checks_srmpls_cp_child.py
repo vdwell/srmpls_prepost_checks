@@ -1,19 +1,54 @@
 #!/usr/bin/python3
 
+
+from .connect import connect_to_devices, disconnect_from_devices
+from netmiko.base_connection import BaseConnection
 import pprint
 import re
-from pathlib import Path
-import logging
-from logging.handlers import RotatingFileHandler
-import sys
-from netmiko.base_connection import BaseConnection
+
+def check1 (connection:list[BaseConnection, str, str, str]) -> list[str,str,bool,str]:
+    # function to confirm that range 16000 is used by isis instance x and bgp
+    # return list consisting of lists: device ip, result check, comment
+    result: list[str,bool,str] = []
+    flag: bool = False
+    comment: str = ''
+    raw_output: str = connection[0].send_command('show mpls label table label 16000')
+    content: list[str] = raw_output.split('\n')
+    for line in content:
+        if 'ISIS' in line:
+            flag = True
+            comment = 'ISIS'
+    result.append(connection[1])
+    result.append(connection[2])
+    result.append(flag)
+    result.append(comment)
+
+    return result
 
 
-current_dir = Path(__file__).parent
-parent_dir = current_dir.parent
-superparent_dir = parent_dir.parent
-sys.path.append(str(superparent_dir))
-from mp import connect_to_devices, disconnect_from_devices
+
+
+def check2 (connection:list[BaseConnection, str, str, str]) -> list[str,str,bool,str]:
+    # function to confirm that range 16000 is used by isis instance x and bgp
+    # return list consisting of lists: device ip, result check, comment
+    result: list[str,bool,str] = []
+    flag: bool = False
+    comment: str = ''
+    raw_output: str = connection[0].send_command('show isis')
+    content: list[str] = raw_output.split('\n')
+    for line in content:
+        if 'ISIS' in line:
+            flag = True
+            comment = 'ISIS'
+    result.append(connection[1])
+    result.append(connection[2])
+    result.append(flag)
+    result.append(comment)
+
+    return result
+
+
+
 
 
 def srmpls_ping (connection:list[BaseConnection, str, str, str], hosts2ping: list[str]) -> list[list[str, int, str, str]]:
@@ -178,7 +213,6 @@ def mpls_trace (connection:list[BaseConnection, str, str, str], hosts2ping: list
 
 
 
-
 def ping_result_analysis (ping_results_on_router: list[list[str, int, str, str]]) -> list[int]:
     """
     the function takes list with ping result for each host and extract from there key values (4 items): 
@@ -250,8 +284,6 @@ def trace_result_analysis (trace_results_on_router: list[list[str, bool, int, st
     result.append(failed_commands)
 
     return result
-
-
 
 
 

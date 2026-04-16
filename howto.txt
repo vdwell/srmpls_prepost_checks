@@ -1,2 +1,5 @@
 source venv/bin/activate
-python3 -m app.main -c config.yml
+
+python3 -m app.phase1_enable_srmpls.main -c config.yml
+
+python3 -m app.phase2_switch_to_srmpls.main -c config.yml

@@ -1,12 +1,32 @@
 #!/usr/bin/python3
 
 
-from .connect import connect_to_devices, disconnect_from_devices
-from netmiko.base_connection import BaseConnection
+
 import pprint
 import re
+from pathlib import Path
+import logging
+from logging.handlers import RotatingFileHandler
+import sys
+from netmiko.base_connection import BaseConnection
+
 
 from .checks_reachability_child import srmpls_ping, mpls_ping, srmpls_trace, mpls_trace, trace_result_analysis, ping_result_analysis
+
+current_dir = Path(__file__).parent
+parent_dir = current_dir.parent
+superparent_dir = parent_dir.parent
+sys.path.append(str(superparent_dir))
+from mp import connect_to_devices, disconnect_from_devices
+
+
+
+# from .connect import connect_to_devices, disconnect_from_devices
+# from netmiko.base_connection import BaseConnection
+# import pprint
+# import re
+
+# from .checks_reachability_child import srmpls_ping, mpls_ping, srmpls_trace, mpls_trace, trace_result_analysis, ping_result_analysis
 
 
 def check_reachability (connections:list[list[BaseConnection, str, str, str]], hosts2ping: list[str]):
