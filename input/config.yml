@@ -1,6 +1,7 @@
 
 parameters:
   isis_process_name: 1
+  sr_blocks: [15000, 15999, 16000, 47999]
   devices: devices.csv
   hosts2ping: routers4pings.txt
   username: cisco

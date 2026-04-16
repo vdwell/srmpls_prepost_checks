@@ -6,7 +6,8 @@ import re
 import csv
 import yaml
 import pprint
-
+from argparse import ArgumentParser, Namespace
+import sys
 
 current_dir = Path(__file__).parent
 parent_dir = current_dir.parent
@@ -103,6 +104,24 @@ def csv2list (csv_file: Path) -> list[list[str]]:
             #     continue
             result.append(row)
     return result
+
+
+def get_input_parameters():
+    current_dir = Path(__file__).parent
+    parent_dir = current_dir.parent
+
+    parser = ArgumentParser()
+
+    parser.add_argument(
+                        '-c', '--config_file',
+                        help='yaml config file in input folder'
+                        )
+
+    args: Namespace = parser.parse_args()
+
+    yaml_config: Path = parent_dir / 'input' / args.config_file
+    mydict = yaml2dict(yaml_config)
+    return mydict
 
 
 

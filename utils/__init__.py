@@ -1,1 +1,1 @@
-from .utils import text2list, list2file, get_filnames_in_folder, yaml2data, csv2list, yaml2dict
+from .utils import text2list, list2file, get_filnames_in_folder, yaml2data, csv2list, yaml2dict, get_input_parameters
