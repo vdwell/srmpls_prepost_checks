@@ -29,8 +29,7 @@ from mp import connect_to_devices, disconnect_from_devices
 # from .checks_reachability_child import srmpls_ping, mpls_ping, srmpls_trace, mpls_trace, trace_result_analysis, ping_result_analysis
 
 
-def check_reachability (connections:list[list[BaseConnection, str, str, str]], hosts2ping: list[str]):
-    
+def build_ping_srmpls_report (connections:list[list[BaseConnection, str, str, str]], hosts2ping: list[str]):
         # srmpls ping results (per device)
     for device_connection in connections:
         srmpls_ping_result: list[list[str, int, str, str]] = srmpls_ping(device_connection, hosts2ping)
@@ -41,6 +40,7 @@ def check_reachability (connections:list[list[BaseConnection, str, str, str]], h
     print('-' * 50)
 
 
+def build_ping_mpls_report (connections:list[list[BaseConnection, str, str, str]], hosts2ping: list[str]):
     # classic mpls ping results (per device)
     for device_connection in connections:
         mpls_ping_result: list[list[str, int, str, str]] = mpls_ping(device_connection, hosts2ping)
@@ -51,7 +51,7 @@ def check_reachability (connections:list[list[BaseConnection, str, str, str]], h
     print('-' * 50)
 
 
-
+def build_trace_srmpls_report (connections:list[list[BaseConnection, str, str, str]], hosts2ping: list[str]):
     # srmpls trace results (per device)
     for device_connection in connections:
         srmpls_trace_result: list[list[str, bool, int, str, list[str], str]] = srmpls_trace(device_connection, hosts2ping)
@@ -62,7 +62,7 @@ def check_reachability (connections:list[list[BaseConnection, str, str, str]], h
     print('-' * 50)
 
 
-
+def build_trace_mpls_report (connections:list[list[BaseConnection, str, str, str]], hosts2ping: list[str]):
     # mpls trace results (per device)
     for device_connection in connections:
         mpls_trace_result: list[list[str, bool, int, str, list[str], str]] = mpls_trace(device_connection, hosts2ping)

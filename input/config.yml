@@ -9,10 +9,10 @@ checks:
   reachability_mpls_trace: True # trace mpls reachability report
   reachability_srmpls_trace: True # trace srmpls reachability report
   #
-  phase0_pre: True #
+  phase0_pre: False #
   phase0_post_config_validation: True #
   phase0_post_state_validation: True
-  phase0_completion: True
+  phase0_completion_report: True
   phase1_pre: True
   phase1_post: True
   phase1_completion: True

@@ -9,7 +9,7 @@ import sys
 from netmiko.base_connection import BaseConnection
 
 
-from .checks_pre_srmpls_child import check_srmpls_label_16000, check_srmpls_sr_blocks_config
+from .checks_phase0_pre_srmpls_child import check_srmpls_label_16000, check_srmpls_sr_blocks_config
 
 current_dir = Path(__file__).parent
 parent_dir = current_dir.parent
@@ -19,7 +19,7 @@ from mp import connect_to_devices, disconnect_from_devices
 
 
 
-def checks_pre_srmpls(connections:list[list[BaseConnection, str, str, str]], isis_process_name: str, sr_blocks: list[int]):
+def checks_phase0_pre_srmpls(connections:list[list[BaseConnection, str, str, str]], isis_process_name: str, sr_blocks: list[int]):
 
 
     #check1: make sure that SRLB and SRGB are configured correctly
@@ -41,6 +41,10 @@ def checks_pre_srmpls(connections:list[list[BaseConnection, str, str, str]], isi
     for item in check2_result:
         print(f'device: {item[1]} ({item[0]}), check_result: {item[2]}, comment: {item[3]}')
     print('-' * 50)
+
+
+
+
 
 if __name__ == "__main__":
     pass
