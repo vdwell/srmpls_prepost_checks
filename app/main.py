@@ -54,6 +54,7 @@ def main():
 
 
 
+
     logger.info("Main started")
 
     mydict: dict[str,dict[str,str]] = get_input_parameters()
