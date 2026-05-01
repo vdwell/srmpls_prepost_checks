@@ -1,0 +1,48 @@
+which checks to do.
+
+states.
+
+0. current state. isis/bgp srmpls is partially configured.
+    changes to move to the next phase: on each router (one by one) configure srmpls control plane (isis and bgp) according to template.
+    before/after each change for each device pre/post checks are done:
+        before. make sure that srgb block is configured and accepted. no conflicts are reported.
+            what to checks.
+                srgb/srlb configuration
+                    show run segment-routing
+                srgb is taken
+                    show mpls label table application isis detail | utility egrep "16000"
+
+        after. make sure that srmpls is configured per template (config and states are correct)
+            what to check.
+                show run router isis
+                show run router bgp
+                ... state commands
+
+    there also need for a script which will help to evaluate progress and eventually confirm that state #0 is finished
+    and srmpls is configured on all there supported routers (srmpls is not yet preferred there) (but there will be also ldp only routers)
+        idea is to check each device to identify how many srmpls sids it has in isis.
+        this check to do on srmpls-enabled routers and legacy(ldp-only) routers
+            what to check on srmpls-enabled routers (srmpls is not preferred)
+                show isis route sr-only detail 
+            
+           
+            
+
+1. srmpls is configured on all supported routers. ldp is still prefered control plane. there are some ldp-only routers.
+    changes to move to the next phase: on each router (one by one) making srmpls control plane as preffered and switching to srmpls dataplane
+    before/after of the each change for each device pre/post checks to do:
+        before. A.make sure that ldp dataplane is preferred
+                B.mpls trace uses mpls labe
+        after. A. make sure that srmpls dataplane is preffered
+               B. make sure that srmpls 
+
+
+
+Note. For each change pre/post checks are done to make sure that following is the same after the change:
+    1.bgp sessions, 
+    2.learned bgp prefixes (for each address family)
+    3.l2vpn pseudowires
+    4. ...
+
+
+    

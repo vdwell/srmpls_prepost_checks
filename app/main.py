@@ -2,6 +2,8 @@
 
 
 
+
+
 def main():
 
     from netmiko import ConnectHandler
@@ -94,6 +96,8 @@ def main():
 
 
     logger.info("Main finished")
+
+
 
 if __name__ == "__main__":
     main()
