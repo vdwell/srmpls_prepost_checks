@@ -1,4 +1,24 @@
 
+
+
+checks:
+  general_pre_post: True # gets/records relevant counters before the change and then compare it with the same after the change
+  #
+  reachability_mpls_ping: True # ping mpls reachability report
+  reachability_srmpls_ping: True # ping srmpls reachability report
+  reachability_mpls_trace: True # trace mpls reachability report
+  reachability_srmpls_trace: True # trace srmpls reachability report
+  #
+  phase0_pre: True #
+  phase0_post_config_validation: True #
+  phase0_post_state_validation: True
+  phase0_completion: True
+  phase1_pre: True
+  phase1_post: True
+  phase1_completion: True
+
+
+
 parameters:
   isis_process_name: 1
   isis_level: 2
@@ -7,4 +27,3 @@ parameters:
   hosts2ping: routers4pings.txt
   username: cisco
   password: cisco123
-  
